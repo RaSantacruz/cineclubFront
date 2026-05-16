@@ -4,8 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 const NavButton = ({ children, to }) => {
   return (
     <Button
-      variant="contained"
-      sx={{}}
+      variant="contained"      
       component={RouterLink}
       to={to}
       sx={{

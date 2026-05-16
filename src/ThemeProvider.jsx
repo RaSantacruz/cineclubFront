@@ -3,10 +3,11 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "rgb(254,204,0)",
+      main: "hsl(48, 100%, 49.8%)",
+      
     },
     secondary: {
-      main: "#f00",
+      main: "hsl(202, 50%, 50%)",
     },
   },
   typography: {
@@ -14,13 +15,20 @@ const theme = createTheme({
       fontFamily: 'Cinzel',
       fontWeight: 700
     },
-    h6: {
+    h5: {
       fontFamily: 'Cinzel',
       fontWeight: 700
     },
-    p: {
+    h6: {
+      fontFamily: 'Cinzel',
+      fontWeight: 700,
+      fontSize: '1rem'
+    },
+    
+    body1: {
       fontFamily: 'Roboto',
-      fontWeight: 400
+      fontWeight: 400,
+      color: 'secondary.contrastText'
     }
   },
 });

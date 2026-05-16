@@ -1,7 +1,62 @@
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Box, Typography } from "@mui/material";
+import YouTubeEmbed from "../UI/YouTubeEmbedded";
+import LogosBox from "../UI/LogosBox";
 export default function OneFilm() {
-    return (
-        <div>
-            <h1>OneFilm</h1>
-        </div>
-    )
+  const { id } = useParams();
+  const api_url = import.meta.env.VITE_API_URL;
+  const [filmData, setFilmData] = useState(null);
+
+  useEffect(() => {
+    async function getFilm(id) {
+      const url = `${api_url}/films/get/${id}`;
+      const response = await fetch(url);
+      let data = await response.json();
+      console.log(data);
+      setFilmData(data);
+    }
+    getFilm(id);
+  }, [id]);
+
+  return (
+    <>
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          p: 3,
+          color: "primary.contrastText",
+          background: "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
+          display: "flex",
+          justifyContent: "space-around",
+        }}
+      >
+        <Typography variant="h2">{filmData?.name}</Typography>
+        <Typography variant="body1" sx={{ ml: 2 , width:'50vw'}}>{filmData?.synopsis}</Typography>
+      </Box>
+      <Box
+        sx={{
+          position: "relative",
+          height: "70vh",
+          backgroundColor: "black",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <LogosBox
+          sx={{ color: "white" }}
+          url_allocine={filmData?.url_allocine}
+          url_imdb={filmData?.url_imdb}
+          url_youtube={filmData?.url_youtube}
+        />
+        <YouTubeEmbed url={filmData?.url_youtube} />
+
+        <Box />
+      </Box>
+    </>
+  );
 }

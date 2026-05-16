@@ -25,7 +25,15 @@ export default function ProgrammedFilms() {
   } else {
     return (
       <>
-        <Box variant="section" sx={{ p: 2, border: '1px dashed grey', bgcolor: 'primary.light' }}>
+        <Box
+          variant="section"
+          sx={{
+            p: 2,
+            border: "1px dashed grey",
+            bgcolor: "secondary.dark",
+            color: "secondary.contrastText",
+          }}
+        >
           <Typography variant="h5">
             Votez pour les films en compétition ci-dessous
           </Typography>
