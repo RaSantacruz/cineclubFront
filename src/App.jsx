@@ -1,5 +1,7 @@
+import "./index.css"
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Pages/Home';
 import FilmsInCompetition from './components/Pages/FilmsInCompetition';
 import PrieviousFilms from './components/Pages/PrieviousFilms';
 import ProgrammedFilms from './components/Pages/ProgrammedFilms';
@@ -21,6 +23,7 @@ export default function App() {
         <AuthProvider>
           <Nav />
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/FilmsInCompetition" element={<FilmsInCompetition />} />
             <Route path="/previous" element={<PrieviousFilms />} />
             <Route path="/programmed" element={<ProgrammedFilms />} />

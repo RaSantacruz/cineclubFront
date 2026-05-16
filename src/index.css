@@ -1,0 +1,50 @@
+@font-face {
+  font-family: 'UndevelopedBook';
+  src: url('./assets/fonts/UndevelopedBook.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Limelight';
+  src: url('./assets/fonts/Limelight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Mucha';
+  src: url('./assets/fonts/AlphonseMucha.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('./assets/fonts/Cinzel-Regular.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('./assets/fonts/Cinzel-Bold.otf') format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('./assets/fonts/Cinzel-Black.otf') format('opentype');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'CinzelDecorative';
+  src: url('./assets/fonts/CinzelDecorative-Regular.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'CinzelDecorative';
+  src: url('./assets/fonts/CinzelDecorative-Bold.otf') format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'CinzelDecorative';
+  src: url('./assets/fonts/CinzelDecorative-Black.otf') format('opentype');
+  font-weight: 900;
+}
