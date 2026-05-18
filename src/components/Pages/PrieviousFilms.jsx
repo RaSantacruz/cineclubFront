@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import FilmList from "../UI/FilmList";
+import FilmList from "../Films/FilmList";
 import { Typography, Grid } from "@mui/material";
 export default function ProgrammedFilms() {
   const [filmsData, setFilmsData] = useState(null);

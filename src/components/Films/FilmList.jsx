@@ -1,5 +1,5 @@
 import { Grid, Box } from "@mui/material";
-import FilmSmall from "../UI/FilmSmall";
+import FilmSmall from "./FilmSmall";
 
 export default function FilmList({ filmsData }) {
   return (

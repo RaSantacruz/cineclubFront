@@ -29,9 +29,11 @@ export default function OneFilm() {
           right: 0,
           p: 3,
           color: "primary.contrastText",
-          background: "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
+          background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 20%, transparent 40%)",
+          height:'15vh',
           display: "flex",
           justifyContent: "space-around",
+          alignItems: "start",
         }}
       >
         <Typography variant="h2">{filmData?.name}</Typography>
@@ -40,7 +42,7 @@ export default function OneFilm() {
       <Box
         sx={{
           position: "relative",
-          height: "70vh",
+          height: "76vh",
           backgroundColor: "black",
           display: "flex",
           justifyContent: "center",

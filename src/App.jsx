@@ -9,7 +9,7 @@ import OneFilm from './components/Pages/OneFilm';
 import About from './components/Pages/About';
 import BackOfficeFilms from './components/Pages/BackOfficeFilms';
 import Nav from './components/Nav';
-import AuthProvider from './contexts/AuthContext';
+import {AuthProvider} from './contexts/AuthContext';
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./ThemeProvider";

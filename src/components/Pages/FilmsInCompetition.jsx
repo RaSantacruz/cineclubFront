@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import FilmList from "../UI/FilmList";
+import FilmList from "../Films/FilmList";
 import { Typography, Box } from "@mui/material";
 import { data } from "react-router-dom";
 export default function ProgrammedFilms() {

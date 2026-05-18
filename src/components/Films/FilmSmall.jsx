@@ -19,7 +19,7 @@ export default function FilmSmall({ filmData }) {
 
   // version raccourcie du synopis
   const synopsisShort =
-    filmData.synopsis.substring(0, 100).split(" ").slice(0, -1).join(" ") +
+    filmData.synopsis.substring(0, 80).split(" ").slice(0, -1).join(" ") +
     "...";
 
   // gestion de la redirection
@@ -39,6 +39,7 @@ export default function FilmSmall({ filmData }) {
         width: "25rem",
         height: "30rem",
         cursor: "pointer",
+        p:2
       }}
       onClick={handleClick}
     >
