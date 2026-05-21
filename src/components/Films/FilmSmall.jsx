@@ -44,7 +44,7 @@ export default function FilmSmall({ filmData }) {
       onClick={handleClick}
     >
       {filmData.status === "programmed" && (
-        <Typography variant="h6">Le {projectionDate}</Typography>
+        <Typography variant="h6" color="secondary">Le {projectionDate}</Typography>
       )}
       <Typography variant="h4">{filmData.name}</Typography>
 

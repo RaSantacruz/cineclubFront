@@ -5,8 +5,7 @@ import AuthentificationMenu from "./AuthentificationMenu";
 import DeconnexionMenu from "./DeconnexionMenu";
 
 export default function ProfileButton() {
-  const { user } = useAuth();
-  console.log(user);
+  const { user } = useAuth();  
   function getInitials(name) {
     if (!name) return "";
 

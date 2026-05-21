@@ -8,12 +8,13 @@ export default function PostsList({ filmId }) {
   useEffect(() => {
     async function getData() {
       const response = await fetch(url);
-      const data = await response.json();      
+      const data = await response.json();
+      console.log(data);
       setPosts(data);
     }
     getData();
   }, []);
-  
+  useEffect(() => console.log(posts), [posts]);
 
   return (
     <Box
@@ -21,19 +22,16 @@ export default function PostsList({ filmId }) {
         display: "flex",
         flexDirection: "column",
         gap: "1rem",
-        alignItems: "center",
-        
+        alignItems: "center",        
       }}
     >
       {posts?.map((post, index) => (
         <Post
           content={post.content}
           childrenPosts={post.children}
-          level={1}
+          level={0}
           author={post.author}
           date= {post.created_at}
-          filmId={post.film_id}
-          postId={post.id}
           key={index}
         />
       ))}

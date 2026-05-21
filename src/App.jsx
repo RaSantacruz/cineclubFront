@@ -9,6 +9,7 @@ import OneFilm from './components/Pages/OneFilm';
 import About from './components/Pages/About';
 import BackOfficeFilms from './components/Pages/BackOfficeFilms';
 import Nav from './components/Nav';
+import PostsList from './components/Posts/PostsList';
 import {AuthProvider} from './contexts/AuthContext';
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -30,6 +31,8 @@ export default function App() {
             <Route path="/film/:id" element={<OneFilm />} />
             <Route path="/about" element={<About />} />
             <Route path="/backoffice" element={<BackOfficeFilms />} />
+            <Route path='/testPost' element={<PostsList filmId={1}/>}/>
+            
           </Routes>
         </AuthProvider>
       </ThemeProvider>

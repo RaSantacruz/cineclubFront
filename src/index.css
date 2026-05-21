@@ -1,6 +1,10 @@
+html {
+  font-size: clamp(10px, 1vw, 20px);
+}
+
 @font-face {
   font-family: 'UndevelopedBook';
-  src: url('./assets/fonts/UndevelopedBook.otf') format('truetype');
+  src: url('./assets/fonts/UndevelopedBook.ttf') format('truetype');
 }
 
 @font-face {
