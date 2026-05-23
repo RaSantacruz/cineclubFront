@@ -1,23 +1,27 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import YouTubeEmbed from "../UI/YouTubeEmbedded";
 import LogosBox from "../UI/LogosBox";
 import PostsList from "../Posts/PostsList";
+import RatingsBox from "../Ratings/RatingsBox";
 export default function OneFilm() {
-  const { id } = useParams();
+  const { filmId } = useParams();
   const api_url = import.meta.env.VITE_API_URL;
   const [filmData, setFilmData] = useState(null);
 
-  useEffect(() => {
-    async function getFilm(id) {
+  async function getFilm(id) {
       const url = `${api_url}/films/get/${id}`;
       const response = await fetch(url);
-      let data = await response.json();
+      let data = await response.json();           
       setFilmData(data);
+      return data;
     }
-    getFilm(id);
-  }, [id]);
+
+  useEffect(() => {
+    
+    getFilm(filmId);
+  }, [filmId]);
 
   return (
     <>
@@ -43,6 +47,7 @@ export default function OneFilm() {
           {filmData?.synopsis}
         </Typography>
       </Box>
+
       {/*  Video avec liens externes */}
       <Box
         sx={{
@@ -61,13 +66,25 @@ export default function OneFilm() {
           url_youtube={filmData?.url_youtube}
         />
         <YouTubeEmbed url={filmData?.url_youtube} />
+        <RatingsBox          
+          filmId={filmId}
+          nbRatings={filmData?.nb_ratings}
+          averageScore={filmData?.average_score}
+          getFilm={getFilm}
+        />
 
         <Box />
       </Box>
+
       {/* Commentaires */}
       <Box sx={{ mt: "10rem" }}>
-        <Typography variant="h2" sx={{ mb: 2, textAlign: "center", fontFamily:'UndevelopedBook'}}>Commentaires</Typography>
-        <PostsList filmId={id} />
+        <Typography
+          variant="h2"
+          sx={{ mb: 2, textAlign: "center", fontFamily: "UndevelopedBook" }}
+        >
+          Commentaires
+        </Typography>
+        <PostsList filmId={filmId} />
       </Box>
     </>
   );

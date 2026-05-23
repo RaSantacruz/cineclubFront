@@ -33,7 +33,7 @@ export default function LogosBox({ url_allocine, url_imdb, url_youtube }) {
           textDecoration: "none",
         }}
       >
-        <Box component="img" src={allocineLogo} sx={{ height: "5rem" }} />
+        <Box component="img" src={allocineLogo} sx={{ height: "3rem" }} />
       </Box>
 
       <Box
@@ -52,7 +52,7 @@ export default function LogosBox({ url_allocine, url_imdb, url_youtube }) {
           component="img"
           src={imdbLogo}
           alt="imdb"
-          sx={{ height: "3rem" }}
+          sx={{ height: "2rem" }}
         />
       </Box>
 
@@ -72,7 +72,7 @@ export default function LogosBox({ url_allocine, url_imdb, url_youtube }) {
           component="img"
           src={youtubeLogo}
           alt="imdb"
-          sx={{ height: "3rem" }}
+          sx={{ height: "2rem" }}
         />
       </Box>
     </Box>
