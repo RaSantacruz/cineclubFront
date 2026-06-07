@@ -1,31 +1,50 @@
 import { useParams } from "react-router-dom";
 import { use, useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
+import { Edit as EditIcon } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 import YouTubeEmbed from "../UI/YouTubeEmbedded";
 import LogosBox from "../UI/LogosBox";
+import SubscriptionBox from "../Subscription/SubscriptionBox";
 import PostsList from "../Posts/PostsList";
 import RatingsBox from "../Ratings/RatingsBox";
+import getFilm from "../../helpers/getFilm";
+import useAuth from "../../hooks/useAuth";
+
 export default function OneFilm() {
   const { filmId } = useParams();
   const api_url = import.meta.env.VITE_API_URL;
   const [filmData, setFilmData] = useState(null);
-
-  async function getFilm(id) {
-      const url = `${api_url}/films/get/${id}`;
-      const response = await fetch(url);
-      let data = await response.json();           
-      setFilmData(data);
-      return data;
-    }
+  const { user } = useAuth();
+  // gestion de la date de projection
+  let projectionDate;
+  if (filmData?.status === "programmed") {
+    projectionDate = new Date(filmData.projection_date).toLocaleDateString(
+      "fr-FR",
+      {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      },
+    );
+  }
 
   useEffect(() => {
-    
-    getFilm(filmId);
+    async function getAndrefreshFilms() {
+      const data = await getFilm(filmId);      
+      setFilmData(data);      
+    }
+    getAndrefreshFilms();
   }, [filmId]);
+
+  useEffect(() => {console.log(projectionDate)}, [filmData]);
 
   return (
     <>
-      {/* Dégradé noir de bas de page avec titre et synopsis*/}
+      {/* Titre  et synopsis*/}
       <Box
         sx={{
           position: "absolute",
@@ -34,25 +53,24 @@ export default function OneFilm() {
           right: 0,
           p: 3,
           color: "primary.contrastText",
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 20%, transparent 40%)",
           height: "15vh",
           display: "flex",
           justifyContent: "space-around",
-          alignItems: "start",
+          alignItems: "flex-end",
         }}
       >
-        <Typography variant="h2">{filmData?.name}</Typography>
-        <Typography variant="body1" sx={{ ml: 2, width: "50vw" }}>
+        <Typography variant="h4">{filmData?.name}</Typography>
+        <Typography variant="body1" sx={{ ml: 2,  width: "50vw", height: "10vh", color: "secondary.dark"}}>
           {filmData?.synopsis}
         </Typography>
       </Box>
 
-      {/*  Video avec liens externes */}
+      {/*  Bloc qui contient:  Video, liens externes, votes, inscription */}
       <Box
         sx={{
           position: "relative",
           height: "76vh",
+          width: "100vw",
           backgroundColor: "black",
           display: "flex",
           justifyContent: "center",
@@ -65,13 +83,43 @@ export default function OneFilm() {
           url_imdb={filmData?.url_imdb}
           url_youtube={filmData?.url_youtube}
         />
+
         <YouTubeEmbed url={filmData?.url_youtube} />
-        <RatingsBox          
-          filmId={filmId}
-          nbRatings={filmData?.nb_ratings}
-          averageScore={filmData?.average_score}
-          getFilm={getFilm}
-        />
+
+        {/* Conteneur pour l'affichage vertical de la date de projection, de l'inscription et des votes */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1rem",
+            ml: 3,
+          }}
+        >
+          {user && user?.role === "ADMIN" && (
+            <Typography sx={{ color: "primary.light", p: 2 }} variant="Body1">
+              <IconButton>
+                <Link to={`/admin/editOneFilm/${filmId}`}>
+                  <EditIcon sx={{ color: "primary.dark" }} />
+                </Link>
+              </IconButton>
+              Editer
+            </Typography>
+          )}
+          {filmData?.status === "programmed" && (
+            <Typography sx={{ color: "primary.light", p: 2 }} variant="h6">
+              {projectionDate} 
+            </Typography>
+          )}
+
+          <SubscriptionBox filmId={filmId} />
+          <RatingsBox
+            filmId={filmId}
+            nbRatings={filmData?.nb_ratings}
+            averageScore={filmData?.average_score}
+            getFilm={getFilm}
+          />
+        </Box>
 
         <Box />
       </Box>
@@ -80,7 +128,7 @@ export default function OneFilm() {
       <Box sx={{ mt: "10rem" }}>
         <Typography
           variant="h2"
-          sx={{ mb: 2, textAlign: "center", fontFamily: "UndevelopedBook" }}
+          sx={{ mb: 2, textAlign: "center", fontFamily: "UndevelopedBook", color:"secondary.main" }}
         >
           Commentaires
         </Typography>

@@ -7,26 +7,30 @@ const theme = createTheme({
       
     },
     secondary: {
-      main: "hsl(202, 50%, 50%)",
+      main: "#202349",
     },
   },
   typography: {
+    h3: {
+      fontFamily: 'Orbitron',
+      fontWeight: 700
+    },
     h4: {
-      fontFamily: 'Cinzel',
+      fontFamily: 'Orbitron',
       fontWeight: 700
     },
     h5: {
-      fontFamily: 'Cinzel',
+      fontFamily: 'Exo2',
       fontWeight: 700
     },
     h6: {
-      fontFamily: 'Cinzel',
+      fontFamily: 'Exo2',
       fontWeight: 700,
       fontSize: '1rem'
     },
     
     body1: {
-      fontFamily: 'Roboto',
+      fontFamily: 'Exo2',
       fontWeight: 400,
       color: 'secondary.contrastText'
     }

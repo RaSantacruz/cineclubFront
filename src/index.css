@@ -7,10 +7,6 @@ html {
   src: url('./assets/fonts/UndevelopedBook.ttf') format('truetype');
 }
 
-@font-face {
-  font-family: 'Limelight';
-  src: url('./assets/fonts/Limelight.ttf') format('truetype');
-}
 
 @font-face {
   font-family: 'Mucha';
@@ -35,20 +31,17 @@ html {
   font-weight: 900;
 }
 
-@font-face {
-  font-family: 'CinzelDecorative';
-  src: url('./assets/fonts/CinzelDecorative-Regular.otf') format('opentype');
-  font-weight: 400;
-}
 
 @font-face {
-  font-family: 'CinzelDecorative';
-  src: url('./assets/fonts/CinzelDecorative-Bold.otf') format('opentype');
-  font-weight: 700;
-}
-
-@font-face {
-  font-family: 'CinzelDecorative';
-  src: url('./assets/fonts/CinzelDecorative-Black.otf') format('opentype');
+  font-family: 'Orbitron';
+  src: url('./assets/fonts/Orbitron-VariableFont_wght.ttf') format('truetype');
   font-weight: 900;
 }
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./assets/fonts/Exo2-VariableFont_wght.ttf') format('truetype');
+  font-weight: 900;
+}
+
+

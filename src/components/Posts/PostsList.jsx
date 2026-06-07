@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Post from "./Post";
 import { Box } from "@mui/material";
+import AnswerForm from "./AnswerForm";
 export default function PostsList({ filmId }) {
   const [posts, setPosts] = useState([]);
 
@@ -13,7 +14,7 @@ export default function PostsList({ filmId }) {
   }
   useEffect(() => {
     getAndRenderData();
-  }, []);
+  },[]);
 
   return (
     <Box
@@ -21,9 +22,11 @@ export default function PostsList({ filmId }) {
         display: "flex",
         flexDirection: "column",
         gap: "1rem",
-        alignItems: "center",
+        alignItems: "flex-start",
+        ml: "5rem"
       }}
     >
+      <AnswerForm filmId={filmId} getAndRenderData={getAndRenderData} />
       {posts?.map((post, index) => (
         <Post
           content={post.content}

@@ -28,8 +28,7 @@ export default function RatingsBox({
       credentials: "include",
       body: JSON.stringify({ filmId: filmId }),
     });
-    let data = await response.json();
-    console.log(data);
+    let data = await response.json();    
     return data.score;
   }
   // au montage, obtenir la note de l'utilisaateur si on est connecté
@@ -69,7 +68,7 @@ export default function RatingsBox({
         // rafraîchir la note moyenne
         setRefreshedAverageScore(data.average_score);
       } catch (err) {
-        setRate(0); // on réinitialise la note affichée       
+        setRate(0); // on réinitialise la note affichée
         alert("Une erreur est survenue, votre note n'a pas été enregistrée.");
       }
     };
@@ -88,19 +87,30 @@ export default function RatingsBox({
       }}
     >
       <Typography>Votre note:</Typography>
-      <Rating
-        sx={{
-          "& .MuiRating-iconEmpty": {
-            color: "white",
-          },
+      <Box
+        onClick={() => {
+          if (!user) {
+            alert("Veuillez vous connecter pour envoyer une note");
+          }
         }}
-        value={rate || initialRate}
-        size="large"
-        precision={1}
-        onChange={(event, newRate) => {
-          setRate(newRate);
-        }}
-      />
+      >
+        <Rating
+          sx={{
+            "& .MuiRating-iconEmpty": {
+              color: "white",
+            },
+          }}
+          value={rate || initialRate}
+          size="large"
+          precision={1}
+          readOnly={!user}
+          onChange={(event, newRate) => {
+            setRate(newRate);
+          }}
+          emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+        />
+      </Box>
+
       <Typography>
         Note moyenne: {refreshedAverageScore ?? averageScore}/5
       </Typography>

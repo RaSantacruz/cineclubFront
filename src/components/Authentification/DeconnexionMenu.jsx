@@ -20,6 +20,7 @@ export default function DeconnexionMenu({ anchorEl, open, onClose }) {
 
   function handleClick() {
     onClose();
+    logoutFromBackend();
     logout();
   }
   return (

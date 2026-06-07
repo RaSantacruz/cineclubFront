@@ -1,16 +1,15 @@
 import Button from "@mui/material/Button";
-import { Link as RouterLink } from "react-router-dom";
+import { Link  } from "react-router-dom";
 
 const NavButton = ({ children, to }) => {
   return (
     <Button
       variant="contained"      
-      component={RouterLink}
+      component={Link}
       to={to}
       sx={{
-        fontFamily: "Cinzel",
-        fontWeight: 700,
-        fontSize: "1rem",
+        fontFamily: "Orbitron",        
+        fontSize: "0.8rem",
         bgcolor: "primary.light",
       }}
     >

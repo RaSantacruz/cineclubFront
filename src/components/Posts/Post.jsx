@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import {
   Card,
   CardContent,
@@ -8,6 +8,7 @@ import {
   Link,
 } from "@mui/material";
 import ReplyForm from "./ReplyForm";
+import LikeBox from "../Likes/LikeBox";
 import useAuth from "../../hooks/useAuth";
 
 export default function Post({
@@ -26,8 +27,20 @@ export default function Post({
   const [nested, setNested] = useState(true);
   // gestion de la réponse au post
   const [answering, setAnswering] = useState(false);
-  let contentShort;
+  // nombre de réponses au post
+  let  NbReponsesText;
+  switch (childrenPosts.length) {
+    case 0:
+      NbReponsesText = "Pas de réponse";
+      break;
+    case 1:
+      NbReponsesText = "1 réponse";
+      break;
+    default:
+      NbReponsesText = `${childrenPosts.length} Réponses `;
+  }
   // contenu raccourci du post
+  let contentShort;  
   if (content.substring(0, 80).split(" ").length > 1) {
     contentShort =
       content.substring(0, 80).split(" ").slice(0, -1).join(" ") + "...";
@@ -55,31 +68,52 @@ export default function Post({
         variant="elevation"
         sx={{
           mb: 2,
-          width: level === 1 ? "80rem" : "60rem",
-          backgroundColor: "#f5f5f5",
+          width: level === 1 ? "50rem" : "30rem",
+          backgroundColor: "#fff",
           ml: `${level * 10}rem`,
         }}
       >
-        <CardContent sx={{ display: "flex", flexDirection: "column" }}>
+        <CardContent
+          sx={{ display: "flex", flexDirection: "column", minHeight: "10rem" }}
+        >
+          {/* Date et auteur */}
+
           <Typography variant="caption" color="text.secondary">
             Posté par {author} le {formatedDate}
           </Typography>
+
+          {/* Contenu */}
 
           <Typography variant="body1">
             {nested ? contentShort : content}
           </Typography>
 
-          {level < 3 &&
-            (
-              <Button
-                color="secondary"
-                variant="outlined"
-                sx={{ alignSelf: "flex-end", mt: 1, fontSize: "0.7rem" }}
-                onClick={handleAnswerClick}
-              >
-                Répondre
-              </Button>
-            )}
+          {/* Bouton répondre */}
+
+          {level < 3 && (
+            <Button
+              color="secondary"
+              variant="outlined"
+              sx={{
+                alignSelf: "flex-start",                
+                fontSize: "0.7rem",
+                mt: "0.5rem",
+                fontFamily: "Orbitron",
+              }}
+              onClick={handleAnswerClick}
+            >
+              Répondre
+            </Button>
+          )}
+
+          {/* Bouton like */}
+
+          <LikeBox
+            sx={{ alignSelf: "flex-end", mr: "3rem", position:"relative", height:"20rem", backgroundColor: "red" }}
+            postId={postId}
+          />
+
+          {/* Formulaire de réponse */}
 
           {answering && (
             <ReplyForm
@@ -89,6 +123,8 @@ export default function Post({
               setNested={setNested}
             />
           )}
+
+          {/* Bouton voir plus ou voir moins */}
           <Link
             component="button"
             variant="body2"
@@ -97,7 +133,7 @@ export default function Post({
           >
             {nested ? (
               <Typography variant="body2" color="secondary">
-                voir plus
+                voir plus {level < 3 && `(${NbReponsesText})`}
               </Typography>
             ) : (
               <Typography variant="body2" color="secondary">
@@ -107,8 +143,10 @@ export default function Post({
           </Link>
         </CardContent>
       </Card>
+
+      {/* Affichage des réponses */}
       {!nested && childrenPosts?.length > 0 && (
-        <Typography variant="h6">REPONSES</Typography>
+        <Typography variant="h6" sx={{ ml: `${(level+1) * 10}rem` }}>REPONSES</Typography>
       )}
 
       {!nested &&

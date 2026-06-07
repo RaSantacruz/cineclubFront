@@ -1,4 +1,4 @@
-import { Typography, Card, CardMedia, Box } from "@mui/material";
+import { Typography, Card, CardMedia, Box} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function FilmSmall({ filmData }) {
@@ -18,12 +18,9 @@ export default function FilmSmall({ filmData }) {
   }
 
   // version raccourcie du synopis
-  let synopsisShort;
-  if (filmData?.synopsis) {
-    synopsisShort =
-      filmData.synopsis.substring(0, 80).split(" ").slice(0, -1).join(" ") +
-      "...";
-  }
+  const synopsisShort =
+    filmData.synopsis.substring(0, 80).split(" ").slice(0, -1).join(" ") +
+    "...";
 
   // gestion de la redirection
   const navigate = useNavigate();
@@ -42,16 +39,14 @@ export default function FilmSmall({ filmData }) {
         width: "25rem",
         height: "30rem",
         cursor: "pointer",
-        p: 2,
+        p:2
       }}
       onClick={handleClick}
     >
       {filmData.status === "programmed" && (
-        <Typography variant="h6" color="secondary">
-          Le {projectionDate}
-        </Typography>
+        <Typography variant="h6" color="secondary">Le {projectionDate}</Typography>
       )}
-      <Typography variant="h5">{filmData.name}</Typography>
+      <Typography variant="h4">{filmData.name}</Typography>
 
       <CardMedia
         component="img"
@@ -59,19 +54,14 @@ export default function FilmSmall({ filmData }) {
         alt="Poster du film"
         sx={{ width: "100%", height: "20rem", objectFit: "contain" }}
       />
-      {filmData.author && (
-        <Box sx={{ display: "flex", gap: 1, alignItems: "baseline" }}>
-          <Typography variant="body1">par</Typography>
-          <Typography variant="h6">{filmData.author}</Typography>
-        </Box>
-      )}
-
-      {synopsisShort && (
-        <Typography variant="body1">
-          <strong>Synopsis:</strong>
-          {synopsisShort}
-        </Typography>
-      )}
+      <Box sx={{ display: "flex", gap: 1, alignItems: "baseline" }}>
+        <Typography variant="body1">par</Typography>
+        <Typography variant="h6">{filmData.author}</Typography>
+      </Box>
+      <Typography variant="body1">
+        <strong>Synopsis:</strong>
+        {synopsisShort}
+      </Typography>
     </Card>
   );
 }
